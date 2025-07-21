@@ -7,24 +7,13 @@ const initialGameBoard = [
   [null, null, null]
 ];
 
-export default function GameBoard({ onSelectSquare, activePlayerSymbol }) {
-  const [gameBoard, setGameBoard] = useState(initialGameBoard);
-  
-  function handleSelectSquare(rowIndex, colIndex) {
-    // // Verificar si la casilla ya está ocupada
-    // // if (gameBoard[rowIndex][colIndex] !== null) 
-    // {
-    //   return; // No hacer nada si la casilla ya está ocupada
-    // }
+export default function GameBoard({ onSelectSquare,  turns }) {
+  let gameBoard = initialGameBoard;
 
-    setGameBoard((prevGameBoard) => {
-      const updatedBoard = [...prevGameBoard.map((innerArray) => [...innerArray])];
-      // CORRECCIÓN PRINCIPAL: Asignar el valor directamente, no como objeto
-      updatedBoard[rowIndex][colIndex] = activePlayerSymbol;
-      return updatedBoard;
-    });
-
-    onSelectSquare();
+  for (const turn of turns) {
+    const { square, player } = turn;
+    const { row, col } = square;
+    gameBoard[row][col] = player; 
   }
 
   return (
@@ -35,8 +24,8 @@ export default function GameBoard({ onSelectSquare, activePlayerSymbol }) {
             {row.map((playerSymbol, colIndex) => (
               <li key={colIndex}>
                 <button 
-                  onClick={() => handleSelectSquare(rowIndex, colIndex)}
-                //  disabled={playerSymbol !== null} // Deshabilitar si ya está ocupada
+                  onClick={() => onSelectSquare(rowIndex, colIndex)}
+               
                 >
                   {playerSymbol}
                 </button>
