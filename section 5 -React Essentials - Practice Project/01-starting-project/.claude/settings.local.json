@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(code:*)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "Bash(claude --version)",
+      "Bash(where code)",
+      "Bash(powershell:*)",
+      "Bash(mkdir:*)"
+    ],
+    "deny": []
+  }
+}
